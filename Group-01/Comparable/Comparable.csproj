@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BasicEssentials\BasicEssentials.csproj" />
+    <ProjectReference Include="..\..\Utilities\BasicEssentials\BasicEssentials.csproj" />
   </ItemGroup>
 
 </Project>

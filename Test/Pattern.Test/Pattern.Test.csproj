@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Comparable\Comparable.csproj" />
+    <ProjectReference Include="..\..\Group-01\Comparable\Comparable.csproj" />
   </ItemGroup>
 
 </Project>
