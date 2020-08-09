@@ -8,11 +8,13 @@ namespace Pattern.Test
     public class OYearsShould
     {
         //Arrange //Act //Assert
-        [Fact]
-        public void SosMenor_Return_true()
+        [Theory]
+        [InlineData(10, 15)]
+        [InlineData(2650, 2651)]
+        public void SosMenor_Return_true(int yearSUT, int yearOther)
         {
-            OYears sut = new OYears(10);
-            OYears nYear = new OYears(15);
+            OYears sut = new OYears(yearSUT);
+            OYears nYear = new OYears(yearOther);
 
             bool isTrue = sut.sosMenor(nYear);
 
