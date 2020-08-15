@@ -9,7 +9,6 @@ namespace Pattern.Test
     {
         //Arrange //Act //Assert
         [Theory]
-        [InlineData(10, 15)]
         [InlineData(2650, 2651)]
         public void SosMenor_Return_true(int yearSUT, int yearOther)
         {
@@ -55,23 +54,23 @@ namespace Pattern.Test
         }
 
         [Fact]
-        public void SosMayor_Return_false()
+        public void SosMayor_Return_true()
         {
             OYears sut = new OYears(9);
             OYears nYear = new OYears(3);
 
-            bool isTrue = sut.sosIgual(nYear);
+            bool isTrue = sut.sosMayor(nYear);
 
-            isTrue.Should().BeFalse();
+            isTrue.Should().BeTrue();
         }
 
         [Fact]
-        public void SosMayor_Return_true()
+        public void SosMayor_Return_false()
         {
             OYears sut = new OYears(5);
             OYears nYear = new OYears(8);
 
-            bool isTrue = sut.sosIgual(nYear);
+            bool isTrue = sut.sosMayor(nYear);
 
             isTrue.Should().BeFalse();
         }
