@@ -3,9 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Poke.API.Helpers;
-using Poke.API.Interfaces;
-using Poke.Services;
+using Poke.API.Middleware;
 
 namespace Poke.API
 {
@@ -23,8 +21,8 @@ namespace Poke.API
         {
             services.AddControllers();
 
-            services.AddTransient<IPokemonService, PokemonService>();
-            services.AddTransient<IEnvironmentVariables, EnvironmentVariables>();
+            IoC.AddDependency(services);
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
