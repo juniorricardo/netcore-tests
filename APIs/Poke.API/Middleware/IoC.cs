@@ -11,13 +11,6 @@ namespace Poke.API.Middleware
         {
             services.AddTransient<IPokemonService, PokemonService>();
             services.AddTransient<IEnvironmentVariables, EnvironmentVariables>();
-            //services.AddTransient<IEnvironmentVariables, EnvironmentVariables>();
-            //services.AddTransient<IEnvironmentVariables, EnvironmentVariables>();
-            //services.AddTransient<IEnvironmentVariables, EnvironmentVariables>();
-            //services.AddTransient<IEnvironmentVariables, EnvironmentVariables>();
-            //services.AddTransient<IEnvironmentVariables, EnvironmentVariables>();
-            //services.AddTransient<IEnvironmentVariables, EnvironmentVariables>();
-            //services.AddTransient<IEnvironmentVariables, EnvironmentVariables>();
 
             return services;
         }

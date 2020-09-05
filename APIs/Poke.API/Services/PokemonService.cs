@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Poke.API.Helpers;
+using Poke.API.Entities;
 using Poke.API.Interfaces;
 using Poke.API.Models;
 using Poke.API.Models.Pokemon;
+using RestSharp;
 
 namespace Poke.Services
 {
@@ -14,26 +14,23 @@ namespace Poke.Services
     {
         //https://pokeapi.co/api/v2/pokemon?offset=0&limit=10
 
-        private readonly IEnvironmentVariables environmentVariables;
+        private readonly IEnvironmentVariables _environmentVariables;
 
         public PokemonService(IEnvironmentVariables environmentVariables)
         {
-            this.environmentVariables = environmentVariables;
+            this._environmentVariables = environmentVariables;
         }
-        public async Task<PokemonListWithLimit> GetListPokemonsOf(string limit)
+
+        public async Task<PokemonListWithLimit> GetPokemonsListOf(string limit)
         {
             PokemonListWithLimit pokemonList = new PokemonListWithLimit();
             try
             {
-                string url = $"{environmentVariables.GetUrl("URL_POKEAPI")}/pokemon?offset=0&limit={limit}";
-                Uri _Uri = new Uri(url);
-
-                using (HttpClient client = new HttpClient())
-                {
-                    var response = await client.GetAsync(_Uri);
-                    string result = await response.Content.ReadAsStringAsync();
-                    pokemonList = JsonConvert.DeserializeObject<PokemonListWithLimit>(result);
-                }
+                string url = $"{_environmentVariables.GetUrl("URL_POKEAPI")}/api/v2/pokemon?offset=0&limit={limit}";
+                var client = new RestClient(url);
+                var request = new RestRequest( Method.GET);
+                var response = client.Execute(request);
+                pokemonList = JsonConvert.DeserializeObject<PokemonListWithLimit>(response.Content);
             }
             catch (Exception ex)
             {
@@ -41,5 +38,15 @@ namespace Poke.Services
             }
             return pokemonList;
         }
+
+        public Task<IEnumerable<PokemonEntity>> GetTable()
+        {
+            throw new NotImplementedException();
+        }
+
+        // public async Task<IEnumerable<PokemonEntity>> GetTable()
+        // {
+        //     return await _baseRepository.GetAll();
+        // }
     }
 }

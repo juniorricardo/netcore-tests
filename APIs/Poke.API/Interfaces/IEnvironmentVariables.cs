@@ -1,5 +1,5 @@
 ﻿
-namespace Poke.API.Helpers
+namespace Poke.API.Interfaces
 {
     public interface IEnvironmentVariables
     {

@@ -2,6 +2,7 @@
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Poke.API.Interfaces;
 
 namespace Poke.API.Helpers
 {
@@ -19,24 +20,16 @@ namespace Poke.API.Helpers
             if (hostingEnvironment.IsDevelopment())
                 appSettingsName = $"{appSettingsName}.Development";
 
-
-
             IConfigurationBuilder builder = new ConfigurationBuilder()
                         .SetBasePath(Directory.GetCurrentDirectory())
                         .AddJsonFile($"{appSettingsName}.json");
-
-
-
+            
             IConfigurationRoot configuration = builder.Build();
             string url = configuration[servicio];
-
-
 
             return hostingEnvironment.IsProduction()
                     ? Environment.GetEnvironmentVariable(url)
                     : url;
         }
-
-
     }
 }

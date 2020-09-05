@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Poke.API.Interfaces;
-using Poke.API.Models.Pokemon;
 
 namespace Poke.API.Controllers
 {
@@ -24,8 +18,15 @@ namespace Poke.API.Controllers
         [HttpGet, Route("list/{limit}")]
         public async Task<IActionResult> GetList([FromRoute] string limit)
         {
-            var response = await pokemonService.GetListPokemonsOf(limit);
+            var response = await pokemonService.GetPokemonsListOf(limit);
             return Ok(response.results);
+        }
+        
+        [HttpGet]
+        public async Task<IActionResult> GetList()
+        {
+            var response = await pokemonService.GetTable();
+            return Ok(response);
         }
     }
 }
