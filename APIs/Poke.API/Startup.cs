@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using Poke.API.Data;
 using Poke.API.Middleware;
 
 namespace Poke.API
@@ -25,7 +27,8 @@ namespace Poke.API
                 {
                     opt.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                 });
-
+             // ConnectionString
+             
             services.AddDependency();
             
         }
