@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Poke.API.Entities;
+using Poke.API.Enum;
 using Poke.API.Interfaces;
 using Poke.Services;
 
@@ -24,7 +24,7 @@ namespace Poke.API.Business
         public async Task<IEnumerable<Employee>> GetEmployeesPerPs()
         {
             ICollection<Employee> list = new List<Employee>();
-            var connectionString = _environmentVariables.GetUrl("ConnectionStrings:Balkan");
+            var connectionString = _environmentVariables.GetUrl(EnvironmentSection.ConnectionStrings, EnvironmentService.Balkan);
             if (connectionString == null) throw new Exception();
             var dt = new DataTable();
             await using var sqlConn = new SqlConnection(connectionString);
@@ -37,26 +37,41 @@ namespace Poke.API.Business
             {
                 list.Add(new Employee()
                 {
-                    FirstName = (string) reader[0],
-                    LastName = (string) reader[1],
-                    Title = (string) reader[2]
+                    FirstName = (string) reader["FIRST_NAME"],
+                    LastName = (string) reader["LAST_NAME"],
+                    Title = (string) reader["TITLE"]
                 });
             }
-            // await sqlCmd.ExecuteNonQueryAsync(); // no devuelve datos
-            
-            // await sqlCmd.exe
-            // using (SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlCmd))
-            // {
-            //     sqlAdapter.Fill(dt);
-            // }
             return list;
         }
-        
+
+        public async Task<Employee> GetEmpoyeeById(string id)
+        {
+            var result = new Employee();
+            // var connectionString = _environmentVariables.GetUrl("ConnectionStrings:Balkan");
+            // if (connectionString == null) throw new Exception();
+            // await using var sqlConn = new SqlConnection(connectionString);
+            // const string sql = "sp_balkan_get_employees_by_id";
+            // await using var command = new SqlCommand(sql, sqlConn) {CommandType = CommandType.StoredProcedure};
+            //
+            // command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+            //
+            // await sqlConn.OpenAsync();
+            // await using var reader = await command.ExecuteReaderAsync();
+            // while (await reader.ReadAsync())
+            // {
+            //     result.FirstName = (string) reader["FIRST_NAME"];
+            //     result.LastName = (string) reader["LAST_NAME"];
+            //     result.Title = (string) reader["TITLE"];
+            // }
+
+            return result;
+        }
 
         public async Task<IEnumerable<Employee>> GetEmployeePerQuery()
         {
             ICollection<Employee> list = new List<Employee>();
-            var connectionString = _environmentVariables.GetUrl("ConnectionStrings:Balkan");
+            var connectionString = _environmentVariables.GetUrl(EnvironmentSection.ConnectionStrings, EnvironmentService.Balkan);
             if (connectionString == null) throw new Exception();
             const string queryString = "select FIRST_NAME, LAST_NAME from EMPLOYEE;";
             await using var connection = new SqlConnection(connectionString);
@@ -75,11 +90,6 @@ namespace Poke.API.Business
             return list;
         }
 
-        public Task<Employee> GetEmpoyeeById(string id)
-        {
-            
-            throw new NotImplementedException();
-        }
     }
 
     public interface IEmployeeBusiness

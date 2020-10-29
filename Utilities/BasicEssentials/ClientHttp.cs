@@ -57,7 +57,7 @@ namespace BasicEssentials
 
             var client = new RestClient("https://pokeapi.co/api/v2");
 
-            var request = new RestRequest("pokemon",Method.GET)
+            var request = new RestRequest("pokemon", Method.GET)
                 .AddParameter("limit", limit)
                 .AddParameter("offset", offset);
             // request.AddParameter("foo", "bar", RequestType.QueryString); // => ?foo=bar

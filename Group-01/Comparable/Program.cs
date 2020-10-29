@@ -21,6 +21,7 @@ namespace Comparable
             //
             // // == 0 ; != -1 ;
             // Console.WriteLine("Compare? " + tercer.CompareTo(cuarto));
+            
             RunOutParam();
         }
         static void RunOutParam()

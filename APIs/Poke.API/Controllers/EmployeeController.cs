@@ -1,7 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Poke.API.Business;
-using Poke.API.Entities;
+using Poke.API.Models;
 
 namespace Poke.API.Controllers
 {
@@ -10,6 +11,7 @@ namespace Poke.API.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeBusiness _employeeBusiness;
+        //private readonly IDemoValidatorBusinees _demoValidator;
 
         public EmployeeController(IEmployeeBusiness employeeBusiness)
         {
@@ -32,11 +34,17 @@ namespace Poke.API.Controllers
 
         // Buscar cliente
         //    si existe traer datos con join, numero de cuenta bancaria y datos personales 
-        [HttpGet("employeeid/{employeeid}")]
-        public async Task<IActionResult> GetEmployeeById([FromRoute] string id)
+        [HttpGet("storedprocedure/id/{employeeid}")]
+        public async Task<IActionResult> GetEmployeeById([FromRoute] string employeeid)
         {
-            var employee = await _employeeBusiness.GetEmpoyeeById(id);
+            var employee = await _employeeBusiness.GetEmpoyeeById(employeeid);
             return Ok(employee);
+        }
+
+        [HttpGet("validator")]
+        public IActionResult getDemoValidator([FromQuery] Request request )
+        {
+            return Ok(request);
         }
         
     }

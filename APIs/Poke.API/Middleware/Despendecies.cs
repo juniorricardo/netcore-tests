@@ -2,11 +2,13 @@
 using Poke.API.Business;
 using Poke.API.Helpers;
 using Poke.API.Interfaces;
+using Poke.API.Services;
 using Poke.Services;
+using RestSharp;
 
 namespace Poke.API.Middleware
 {
-    public static class IoC
+    public static class Despendecies
     {
         public static IServiceCollection AddDependency(this IServiceCollection services)
         {
@@ -15,6 +17,8 @@ namespace Poke.API.Middleware
 
             services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddTransient<IEmployeeBusiness, EmployeeBusiness>();
+            
+            services.AddTransient<IRestClient, RestClient>();
 
             return services;
         }

@@ -1,8 +1,10 @@
 ﻿
+using Poke.API.Enum;
+
 namespace Poke.API.Interfaces
 {
     public interface IEnvironmentVariables
     {
-        string GetUrl(string servicio);
+        string GetUrl(EnvironmentSection section, EnvironmentService service);
     }
 }
