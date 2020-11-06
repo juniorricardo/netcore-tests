@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Poke.API.Business;
 using Poke.API.Models;
@@ -17,7 +16,7 @@ namespace Poke.API.Controllers
         {
             _employeeBusiness = employeeBusiness;
         }
-        
+
         [HttpGet("query")]
         public async Task<IActionResult> GetEmployeeByQuery()
         {
@@ -42,10 +41,9 @@ namespace Poke.API.Controllers
         }
 
         [HttpGet("validator")]
-        public IActionResult getDemoValidator([FromQuery] Request request )
+        public IActionResult getDemoValidator([FromQuery] Request request)
         {
             return Ok(request);
         }
-        
     }
 }

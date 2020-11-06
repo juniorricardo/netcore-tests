@@ -6,5 +6,4 @@
         public Gold gold { get; set; }
         public Silver silver { get; set; }
     }
-
 }

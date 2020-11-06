@@ -11,5 +11,4 @@
         public string front_shiny { get; set; }
         public object front_shiny_female { get; set; }
     }
-
 }

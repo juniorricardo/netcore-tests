@@ -6,5 +6,4 @@
         public HeartgoldSoulsilver heartgoldsoulsilver { get; set; }
         public Platinum platinum { get; set; }
     }
-
 }

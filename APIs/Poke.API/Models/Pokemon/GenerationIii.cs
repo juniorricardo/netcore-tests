@@ -6,5 +6,4 @@
         public FireredLeafgreen fireredleafgreen { get; set; }
         public RubySapphire rubysapphire { get; set; }
     }
-
 }

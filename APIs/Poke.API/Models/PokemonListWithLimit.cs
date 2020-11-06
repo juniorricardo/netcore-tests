@@ -15,5 +15,4 @@ namespace Poke.API.Models
         public string name { get; set; }
         public string url { get; set; }
     }
-
 }

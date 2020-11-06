@@ -6,5 +6,4 @@
         public int effort { get; set; }
         public Stat1 stat { get; set; }
     }
-
 }

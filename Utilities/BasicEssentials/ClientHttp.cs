@@ -1,14 +1,12 @@
-﻿using System;
+﻿using BasicEssentials.Model;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
-using BasicEssentials.Model;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using RestSharp;
-using RestSharp.Serialization.Json;
 
 namespace BasicEssentials
 {
@@ -18,9 +16,7 @@ namespace BasicEssentials
         {
             try
             {
-                HttpClient client = new HttpClient();
-
-                client.Timeout = TimeSpan.FromSeconds(20);
+                HttpClient client = new HttpClient {Timeout = TimeSpan.FromSeconds(20)};
 
                 ServicePointManager.ServerCertificateValidationCallback += (se, cert, chain, sslerror) => true;
 
@@ -30,13 +26,10 @@ namespace BasicEssentials
 
                 string result = "";
 
-                using (WebResponse svcResponse = (HttpWebResponse)request.GetResponse())
-                {
-                    using (StreamReader sr = new StreamReader(svcResponse.GetResponseStream()))
-                    {
-                        result = sr.ReadToEnd();
-                    }
-                }
+                using WebResponse svcResponse = (HttpWebResponse)request.GetResponse();
+                using var sr = new StreamReader(svcResponse.GetResponseStream());
+                result = sr.ReadToEnd();
+
                 return result;
             }
             catch (WebException e)
@@ -50,8 +43,8 @@ namespace BasicEssentials
 
         public void GetRestSharp()
         {
-            var limit = "10";
-            var offset = "20";
+            const string limit = "10";
+            const string offset = "20";
             
             // string url = $"https://pokeapi.co/api/v2/pokemon?limit=10&offset=20";
 

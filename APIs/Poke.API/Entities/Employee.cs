@@ -2,12 +2,6 @@
 {
     public class Employee : BaseEntity
     {
-        public string EndDate  { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string StartDate { get; set; }
-        public string Title { get; set; }
-
         public Employee()
         {
         }
@@ -17,5 +11,11 @@
             FirstName = firstName;
             LastName = lastName;
         }
+
+        public string EndDate { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string StartDate { get; set; }
+        public string Title { get; set; }
     }
 }

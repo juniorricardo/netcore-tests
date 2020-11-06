@@ -4,5 +4,4 @@
     {
         IEmployeeRepository UserRepository { get; }
     }
-
 }

@@ -6,5 +6,4 @@
         public Move_Learn_Method move_learn_method { get; set; }
         public Version_Group version_group { get; set; }
     }
-
 }

@@ -4,5 +4,4 @@
     {
         public UltraSunUltraMoon ultrasunultramoon { get; set; }
     }
-
 }

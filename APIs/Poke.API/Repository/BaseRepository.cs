@@ -8,7 +8,7 @@ using Poke.API.Interfaces;
 
 namespace Poke.API.Repository
 {
-    public class BaseRepository<T> : IRepository<T>  where T : BaseEntity
+    public class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly BalkanContext _context;
         protected readonly DbSet<T> _entities;
@@ -41,7 +41,7 @@ namespace Poke.API.Repository
 
         public async Task Delete(int id)
         {
-            T entity = await GetById(id);
+            var entity = await GetById(id);
             _context.Remove(entity);
         }
     }

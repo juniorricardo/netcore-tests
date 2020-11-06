@@ -2,8 +2,9 @@
 using Poke.API.Business;
 using Poke.API.Helpers;
 using Poke.API.Interfaces;
+using Poke.API.Interfaces.Provider;
+using Poke.API.Provider;
 using Poke.API.Services;
-using Poke.Services;
 using RestSharp;
 
 namespace Poke.API.Middleware
@@ -17,8 +18,9 @@ namespace Poke.API.Middleware
 
             services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddTransient<IEmployeeBusiness, EmployeeBusiness>();
-            
+
             services.AddTransient<IRestClient, RestClient>();
+            services.AddTransient<IDbManager, DbManager>();
 
             return services;
         }

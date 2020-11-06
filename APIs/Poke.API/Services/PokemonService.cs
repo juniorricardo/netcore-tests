@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Poke.API.Enum;
 using Poke.API.Interfaces;
 using Poke.API.Models;
@@ -11,15 +10,16 @@ using RestSharp;
 
 namespace Poke.API.Services
 {
-    public class PokemonService : IPokemonService 
+    public class PokemonService : IPokemonService
     {
         private readonly IRestClient _restClient;
 
         public PokemonService(IEnvironmentVariables environmentVariables,
-                              IRestClient restClient)
+            IRestClient restClient)
         {
             _restClient = restClient;
-            _restClient.BaseUrl = new Uri(environmentVariables.GetUrl(EnvironmentSection.Services, EnvironmentService.PokeApi));
+            _restClient.BaseUrl =
+                new Uri(environmentVariables.GetUrl(EnvironmentSection.Services, EnvironmentService.PokeApi));
         }
 
         public async Task<PokemonListWithLimit> GetPokemonsListOf(string limit)
@@ -31,37 +31,47 @@ namespace Poke.API.Services
                     .AddUrlSegment("versionApi", "v2")
                     .AddParameter("offset", "0", ParameterType.QueryString)
                     .AddParameter("limit", limit, ParameterType.QueryString);
-                
+
                 //https://pokeapi.co/api/v2/pokemon?offset=0&limit=10
-                var response =  await _restClient.ExecuteAsync<PokemonListWithLimit>(request);
+                var response = await _restClient.ExecuteAsync<PokemonListWithLimit>(request);
                 TimeoutCheck(request, response);
-                
+
                 pokemonList = response.Data;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error al intentar obtener lista de pokemones. \nDetalle:" + ex.Message + "\n" + ex.StackTrace);
+                Console.WriteLine("Error al intentar obtener lista de pokemones. \nDetalle:" + ex.Message + "\n" +
+                                  ex.StackTrace);
             }
+
             return pokemonList;
         }
-        
+
+        public Task<IEnumerable<PokemonEntity>> GetTable()
+        {
+            throw new NotImplementedException();
+        }
+
         private void TimeoutCheck(IRestRequest request, IRestResponse response)
         {
             if (response.StatusCode != 0) return;
             Console.WriteLine();
             LogError(_restClient.BaseUrl, request, response);
         }
+
         private void LogError(Uri BaseUrl, IRestRequest request, IRestResponse response)
         {
             //Get the values of the parameters passed to the API
-            string parameters = string.Join(", ", request.Parameters.Select(x => x.Name.ToString() + "=" + ((x.Value == null) ? "NULL" : x.Value)).ToArray());
+            var parameters = string.Join(", ",
+                request.Parameters.Select(x => x.Name.ToString() + "=" + (x.Value == null ? "NULL" : x.Value))
+                    .ToArray());
 
             //Set up the information message with the URL, 
             //the status code, and the parameters.
-            string info = "Request to " + BaseUrl.AbsoluteUri 
-                                        + request.Resource + " failed with status code " 
-                                        + response.StatusCode + ", parameters: "
-                                        + parameters + ", and content: " + response.Content;
+            var info = "Request to " + BaseUrl.AbsoluteUri
+                                     + request.Resource + " failed with status code "
+                                     + response.StatusCode + ", parameters: "
+                                     + parameters + ", and content: " + response.Content;
 
             //Acquire the actual exception
             Exception ex;
@@ -77,11 +87,6 @@ namespace Poke.API.Services
 
             //Log the exception and info message
             //_errorLogger.LogError(ex,info);
-        }
-
-        public Task<IEnumerable<PokemonEntity>> GetTable()
-        {
-            throw new NotImplementedException();
         }
 
         // public async Task<IEnumerable<PokemonEntity>> GetTable()

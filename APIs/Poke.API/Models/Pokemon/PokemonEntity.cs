@@ -20,5 +20,4 @@
         public Type[] types { get; set; }
         public int weight { get; set; }
     }
-
 }

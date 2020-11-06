@@ -10,5 +10,4 @@
         public GenerationVi generationvi { get; set; }
         public GenerationVii generationvii { get; set; }
     }
-
 }

@@ -8,7 +8,7 @@ namespace Poke.API.Models
     {
         //[CustomValidation(typeof(Validation), "OrderIsRequired")]
         //public string Order { get; set; }
-        
+
         //[CustomValidation(typeof(Validation), "OffSetIsRequired")]
         public string OffSet { get; set; }
         public string PartA { get; set; }
@@ -23,6 +23,7 @@ namespace Poke.API.Models
                 IsNullOrEmpty(input.ToString()) ? new ValidationResult("The Order field is required.") :
                 ValidationResult.Success;
         }
+
         public static ValidationResult OffSetIsRequired(object input)
         {
             return input == null ? new ValidationResult("The OffSet field is required.") :
@@ -48,11 +49,9 @@ namespace Poke.API.Models
                 }
 
                 if (!IsNullOrEmpty(request.PartA))
-                {
                     return !IsNullOrEmpty(request.PartB)
                         ? ValidationResult.Success
                         : new ValidationResult("The field 'PartB', is required.");
-                }
 
                 return new ValidationResult("The field 'PartA', is required.");
             }
@@ -61,13 +60,14 @@ namespace Poke.API.Models
         }
     }
 
-    
+
     public class Model
     {
         [CustomValidation(typeof(MyCustomValidation),
             "IsNotAnApple")]
         public string FavoriteFruit { get; set; }
     }
+
     public static class MyCustomValidation
     {
         public static ValidationResult IsNotAnApple(object input)
@@ -77,12 +77,9 @@ namespace Poke.API.Models
             if (input?.ToString()
                     ?.ToUpperInvariant() ==
                 "APPLE")
-            {
                 result = new ValidationResult("Apples are not allowed.");
-            }
 
             return result;
         }
     }
-    
 }

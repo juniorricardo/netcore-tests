@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Poke.API.Enum;
+using Poke.API.Extensions;
 using Poke.API.Interfaces;
 
 namespace Poke.API.Controllers
@@ -15,18 +17,20 @@ namespace Poke.API.Controllers
             this.pokemonService = pokemonService;
         }
 
-        [HttpGet, Route("list/{limit}")]
+        [HttpGet]
+        [Route("list/{limit}")]
         public async Task<IActionResult> GetList([FromRoute] string limit)
         {
             var response = await pokemonService.GetPokemonsListOf(limit);
             return Ok(response.results);
         }
-        
+
         [HttpGet]
-        public async Task<IActionResult> GetList()
+        public IActionResult GetList()
         {
-            var response = await pokemonService.GetTable();
-            return Ok(response);
+            return Ok(EnumExtensions.GetValues<PokemonTop>());
+            // var response = await pokemonService.GetTable();
+            // return Ok(response);
         }
     }
 }

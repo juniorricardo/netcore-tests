@@ -7,5 +7,4 @@
         public string front_default { get; set; }
         public string front_gray { get; set; }
     }
-
 }

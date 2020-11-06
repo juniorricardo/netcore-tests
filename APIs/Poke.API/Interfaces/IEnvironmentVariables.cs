@@ -1,5 +1,4 @@
-﻿
-using Poke.API.Enum;
+﻿using Poke.API.Enum;
 
 namespace Poke.API.Interfaces
 {

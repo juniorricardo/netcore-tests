@@ -13,5 +13,4 @@
         public Other other { get; set; }
         public Versions versions { get; set; }
     }
-
 }

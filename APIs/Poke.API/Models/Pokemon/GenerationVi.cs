@@ -5,5 +5,4 @@
         public OmegarubyAlphasapphire omegarubyalphasapphire { get; set; }
         public XY xy { get; set; }
     }
-
 }

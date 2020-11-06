@@ -4,5 +4,4 @@
     {
         public BlackWhite blackwhite { get; set; }
     }
-
 }
