@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net.Mime;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Poke.API.Business;
 using Poke.API.Models;
@@ -6,6 +7,7 @@ using Poke.API.Models;
 namespace Poke.API.Controllers
 {
     [Route("api/[controller]")]
+    [Produces(MediaTypeNames.Application.Json)]
     [ApiController]
     public class EmployeeController : ControllerBase
     {

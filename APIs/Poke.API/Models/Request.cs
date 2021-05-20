@@ -63,8 +63,7 @@ namespace Poke.API.Models
 
     public class Model
     {
-        [CustomValidation(typeof(MyCustomValidation),
-            "IsNotAnApple")]
+        [CustomValidation(typeof(MyCustomValidation), "IsNotAnApple")]
         public string FavoriteFruit { get; set; }
     }
 

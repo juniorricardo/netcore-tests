@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Poke.API.Entities;
 using Poke.API.Enum;
@@ -22,7 +23,7 @@ namespace Poke.API.Services
         public Task<ICollection<Employee>> GetAll()
         {
             ICollection<Employee> list = new List<Employee>();
-
+            Thread.Sleep(10000);
             var connectionString =
                 _environmentVariables.GetUrl(EnvironmentSection.ConnectionStrings, EnvironmentService.Balkan);
             using var connection = _dbManager.GetConnection(connectionString);

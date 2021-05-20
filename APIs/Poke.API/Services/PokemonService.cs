@@ -18,8 +18,7 @@ namespace Poke.API.Services
             IRestClient restClient)
         {
             _restClient = restClient;
-            _restClient.BaseUrl =
-                new Uri(environmentVariables.GetUrl(EnvironmentSection.Services, EnvironmentService.PokeApi));
+            _restClient.BaseUrl = new Uri(environmentVariables.GetUrl(EnvironmentSection.Services, EnvironmentService.PokeApi));
         }
 
         public async Task<PokemonListWithLimit> GetPokemonsListOf(string limit)
@@ -27,7 +26,7 @@ namespace Poke.API.Services
             var pokemonList = new PokemonListWithLimit();
             try
             {
-                var request = new RestRequest("/api/{versionApi}/pokemon", Method.GET)
+                var request = new RestRequest("/api/{versionApi}/pokemonX", Method.GET)
                     .AddUrlSegment("versionApi", "v2")
                     .AddParameter("offset", "0", ParameterType.QueryString)
                     .AddParameter("limit", limit, ParameterType.QueryString);
@@ -54,7 +53,7 @@ namespace Poke.API.Services
 
         private void TimeoutCheck(IRestRequest request, IRestResponse response)
         {
-            if (response.StatusCode != 0) return;
+            if (response.StatusCode == 0) return;
             Console.WriteLine();
             LogError(_restClient.BaseUrl, request, response);
         }

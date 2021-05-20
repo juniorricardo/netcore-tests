@@ -21,6 +21,7 @@ namespace Poke.API.Middleware
 
             services.AddTransient<IRestClient, RestClient>();
             services.AddTransient<IDbManager, DbManager>();
+            services.AddTransient<IMyLogger, MyLogger>();
 
             return services;
         }
